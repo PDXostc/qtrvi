@@ -93,7 +93,7 @@ void QRviNode::nodeConnect(const QString &address, const QString &port)
                        << "Address: " << _nodeAddress << ":" << _nodePort;
             emit remoteConnectionError();
         }
-        if (addNewConnectionDescriptor(fd))
+        else if (addNewConnectionDescriptor(fd))
             emit remoteNodeConnected();
     }
     else
