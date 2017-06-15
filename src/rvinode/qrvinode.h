@@ -15,27 +15,16 @@
 #include <QtCore/QMap>
 #include <QtCore/QObject>
 #include <QtCore/QString>
+#include <QtCore/QSocketNotifier>
 
 #include <rvi.h>
 
 #include "qtrvinode_global.h"
 #include "qrviserviceinterface.h"
 
-/*************************
- *
- * Note and TODO: Currently this library
- * contains an annoying race condition which
- * is largely the result of the wrapper over rvi_lib
- * which shares resource access with QtRvi and was
- * not written to be thread safe
- *
- * Issue #1: Reimplement rvi client protocol entirely in C++
- *
- **************************/
-
 QT_BEGIN_NAMESPACE
 
-class QRviNodeMonitor;
+class QRviSocketNotifier;
 
 class Q_QTRVI_EXPORT QRviNode : public QObject
 {
@@ -70,9 +59,6 @@ public Q_SLOTS:
     // socket watcher notifier handler
     void onReadyRead(int socket);
 
-    // error handlers
-    void handleRviMonitorError(int socket, int error);
-
 Q_SIGNALS:
     // property signals
     void configFileChanged();
@@ -103,7 +89,6 @@ Q_SIGNALS:
 
     // node signals to affect connected services
     void signalServicesForNodeCleanup();
-    void signalMonitorForDoneReading();
 
 private:
     // rvi_lib context handle
@@ -112,16 +97,16 @@ private:
     // absolute path to rvi configuration file
     QString _confFile;
 
-    // collection associating a given socket with it's watcher thread
-    QMap<int, QRviNodeMonitor*> _connectionReaderMap;
+    // collection associating a given socket with it's watcher
+    QMap<int, QRviSocketNotifier*> _readerWatchers;
 
     // data members containing open source rvi core test server address
     QString _testNodePort;
     QString _testNodeAddress;
 
+
     // private methods
     bool addNewConnection(int fd, const QString &address, const QString &port);
-    void handleMonitorPollingFault(int socket);
 };
 
 QT_END_NAMESPACE

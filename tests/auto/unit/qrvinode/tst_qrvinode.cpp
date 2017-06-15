@@ -31,8 +31,7 @@ private slots:
     void testRviNodeConnectWithBadHandle();
     void testRviNodeConnectWithBadAddress();
 
-    // TODO: this test is instigating a nested destructor call
-//    void testRviNodeConnectSuccessWithDefaultTestServerAddress();
+    void testRviNodeConnectSuccessWithDefaultTestServerAddress();
 
 private:
 };
@@ -168,27 +167,27 @@ void TestQRviNode::testRviNodeConnectWithBadAddress()
 }
 
 // Note: See TODO at declaration
-//void TestQRviNode::testRviNodeConnectSuccessWithDefaultTestServerAddress()
-//{
-//    // construct node object
-//    QRviNode node;
+void TestQRviNode::testRviNodeConnectSuccessWithDefaultTestServerAddress()
+{
+    // construct node object
+    QRviNode node;
 
-//    QSignalSpy connectSuccessSpy(&node, &QRviNode::remoteNodeConnected);
-//    QSignalSpy connectErrorSpy(&node, &QRviNode::remoteConnectionError);
-//    QSignalSpy invalidHandleSpy(&node, &QRviNode::invalidRviHandle);
+    QSignalSpy connectSuccessSpy(&node, &QRviNode::remoteNodeConnected);
+    QSignalSpy connectErrorSpy(&node, &QRviNode::remoteConnectionError);
+    QSignalSpy invalidHandleSpy(&node, &QRviNode::invalidRviHandle);
 
-//    // not making call to node init to instigate bad handle scenario
-//    node.nodeInit();
+    // not making call to node init to instigate bad handle scenario
+    node.nodeInit();
 
-//    // call connect with default test server parameters
-//    node.nodeConnect();
+    // call connect with default test server parameters
+    node.nodeConnect();
 
-//    QCOMPARE(connectSuccessSpy.count(), 1);
+    QCOMPARE(connectSuccessSpy.count(), 1);
 
-//    QCOMPARE(connectErrorSpy.count(), 0);
+    QCOMPARE(connectErrorSpy.count(), 0);
 
-//    QCOMPARE(invalidHandleSpy.count(), 0);
-//}
+    QCOMPARE(invalidHandleSpy.count(), 0);
+}
 
 QTEST_MAIN(TestQRviNode)
 #include "tst_qrvinode.moc"

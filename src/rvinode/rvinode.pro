@@ -9,13 +9,13 @@ INCLUDEPATH *= .
 HEADERS += \
     qrvinode.h \
     qtrvinode_global.h \
-    qrvinodemonitor_p.h \
-    qrviserviceinterface.h
+    qrviserviceinterface.h \
+    qrvisocketnotifier_p.h
 
 SOURCES += \
     qrvinode.cpp \
-    qrvinodemonitor.cpp \
-    qrviserviceinterface.cpp
+    qrviserviceinterface.cpp \
+    qrvisocketnotifier.cpp
 
 RVI_INCLUDE_PATH=$$(RVI_INCLUDE_PATH)
 RVI_LIB_PATH=$$(RVI_LIB_PATH)
