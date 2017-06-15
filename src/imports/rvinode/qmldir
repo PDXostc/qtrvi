@@ -1,0 +1,3 @@
+module RviNode
+plugin rvinodeplugin
+classname RviNodePlugin

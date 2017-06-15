@@ -2,7 +2,7 @@
 Qt Library for Remote Vehicle Interaction
 
 Purpose:
------------------
+----------------
 Qt wrapper to create an event driven interface for an application developer to easily integrate GENIVI's RVI protocol into C++ and/or QML applications.
 
 Copyright and Authors:

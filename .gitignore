@@ -57,3 +57,12 @@ qml
 *.exe
 *.out
 *.app
+
+# Example executables
+examples/rviserviceping/rviserviceping
+examples/rviservicepong/rviservicepong
+
+# Test files
+target_wrapper.sh
+tests/auto/unit/qrvinode/qrvinode-test
+tests/auto/unit/qrviserviceinterface/qrviserviceinterface-test
