@@ -13,6 +13,10 @@ moc_*
 Makefile*
 *.autosave
 *.so
+*.so*
+*.prl
+*.pc
+*.cmake
 *.dll
 *.obj
 *.exp
@@ -66,3 +70,9 @@ examples/rviservicepong/rviservicepong
 target_wrapper.sh
 tests/auto/unit/qrvinode/qrvinode-test
 tests/auto/unit/qrviserviceinterface/qrviserviceinterface-test
+
+include
+lib
+mkspecs
+qml
+.rcc/

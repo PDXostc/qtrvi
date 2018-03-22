@@ -21,9 +21,16 @@ void callbackHandler(int fd, void *serviceData, const char * parameters);
 // Constructor
 QRviNode::QRviNode(QObject *parent)
     : QObject(parent), _rviHandle(NULL),
-      _confFile(QStringLiteral("")), _testNodePort(QStringLiteral("9007")),
-      _testNodeAddress(QStringLiteral("38.129.64.41"))
+      _confFile(QStringLiteral("")), _serverNodePort(QStringLiteral("")),
+      _serverNodeAddress(QStringLiteral(""))
 {
+    QString port(QLatin1String(qgetenv("RVI_SERVER_PORT")));
+    QString address(QLatin1String(qgetenv("RVI_SERVER_ADDRESS")));
+
+    if (address.isEmpty())
+        address = "38.129.64.41";
+    if (port.isEmpty())
+        port = "9007";
 }
 
 // Initializer method
@@ -78,8 +85,8 @@ int QRviNode::nodeConnect(const QString &address, const QString &port)
 {
     int fd = -1;
 
-    QString tempAddress = _testNodeAddress;
-    QString tempPort = _testNodePort;
+    QString tempAddress = _serverNodeAddress;
+    QString tempPort = _serverNodePort;
 
     // did we get new connection info?
     if (!address.isEmpty())
@@ -98,7 +105,7 @@ int QRviNode::nodeConnect(const QString &address, const QString &port)
         {
             qWarning() << "Error: rviConnect failed to return a valid socket descriptor"
                        << "Please check the server address and port"
-                       << "Address: " << _testNodeAddress << ":" << _testNodePort;
+                       << "Address: " << _serverNodeAddress << ":" << _serverNodePort;
             emit remoteConnectionError();
         }
         else
@@ -310,7 +317,7 @@ int QRviNode::findAssociatedConnectionId(const QString &address, const QString &
     {
         for (auto * w : _readerWatchers)
         {// we're just looking for the test server socket, address compare is enough
-            if (w->getAddress() == _testNodeAddress)
+            if (w->getAddress() == _serverNodeAddress)
             {// found the test server, exit loop
                 socket = w->socket();
                 break;

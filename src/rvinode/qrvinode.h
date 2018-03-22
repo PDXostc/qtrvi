@@ -101,8 +101,8 @@ private:
     QMap<int, QRviSocketNotifier*> _readerWatchers;
 
     // data members containing open source rvi core test server address
-    QString _testNodePort;
-    QString _testNodeAddress;
+    QString _serverNodePort;
+    QString _serverNodeAddress;
 
 
     // private methods
